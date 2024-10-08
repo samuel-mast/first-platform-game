@@ -1,8 +1,15 @@
 extends Node
 
 @onready var timer: Timer = $Timer
+@onready var hearts_container: HBoxContainer = $"../UI/HeartsContainer"
+@onready var player: CharacterBody2D = $"../Player"
+@onready var HeartClass = preload("res://scenes/heart.tscn")
+
 
 var score = 0
+
+func _ready():
+	hearts_container.setMaxHearts(player.MAX_HITPOINTS)
 
 func add_point():
 	score += 1

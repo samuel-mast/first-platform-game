@@ -1,13 +1,21 @@
 [gd_scene load_steps=15 format=4 uid="uid://k046g03dfch3"]
 
 [ext_resource type="PackedScene" uid="uid://dlhi7yrfri6pq" path="res://scenes/player.tscn" id="1_arb7l"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_ec4n0"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_xqp7c"]
 [ext_resource type="Texture2D" uid="uid://c5c0a7xf7rb1h" path="res://assets/sprites/world_tileset.png" id="2_5eg0m"]
 [ext_resource type="PackedScene" uid="uid://g6c71t5c74f8" path="res://scenes/platform.tscn" id="3_0ahga"]
 [ext_resource type="PackedScene" uid="uid://2y6v6c74hg62" path="res://scenes/coin.tscn" id="4_teffn"]
 [ext_resource type="PackedScene" uid="uid://crmkwjxqprdqm" path="res://scenes/killzone.tscn" id="5_blba8"]
 [ext_resource type="PackedScene" uid="uid://cyydv6bxn6g13" path="res://scenes/enemy.tscn" id="6_oif1w"]
+
+[sub_resource type="GDScript" id="GDScript_kpwkn"]
+script/source = "extends Node2D
+
+@onready var player: CharacterBody2D = $Player
+
+func player_death():
+	player.die()
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nih8n"]
 texture = ExtResource("2_5eg0m")
@@ -216,7 +224,7 @@ _data = {
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d0l5m"]
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_ec4n0")
+script = SubResource("GDScript_kpwkn")
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true

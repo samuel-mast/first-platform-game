@@ -1,8 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://dlhi7yrfri6pq"]
+[gd_scene load_steps=42 format=3 uid="uid://dlhi7yrfri6pq"]
 
 [ext_resource type="Texture2D" uid="uid://ccurs7ixtb1uw" path="res://assets/sprites/knight.png" id="1_dqa6j"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yocce"]
 [ext_resource type="AudioStream" uid="uid://c3ns0vu1atobp" path="res://assets/sounds/explosion.wav" id="3_scayq"]
+[ext_resource type="AudioStream" uid="uid://nrt7pvhqx2p" path="res://assets/sounds/hurt.wav" id="4_gnpbd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_papil"]
 atlas = ExtResource("1_dqa6j")
@@ -146,7 +147,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hi0i4")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_r0nmg")
 }, {
 "duration": 1.0,
@@ -238,6 +239,45 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_o58dr"]
 radius = 6.0
 
+[sub_resource type="Animation" id="Animation_gaptf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_rhxku"]
 resource_name = "death"
 length = 0.5
@@ -278,49 +318,71 @@ tracks/2/keys = {
 "values": [0, 1, 3]
 }
 
-[sub_resource type="Animation" id="Animation_gaptf"]
-length = 0.001
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m25ky"]
+_data = {
+"RESET": SubResource("Animation_gaptf"),
+"death": SubResource("Animation_rhxku")
+}
+
+[sub_resource type="Animation" id="Animation_twrjc"]
+resource_name = "hurt"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DeathSound:playing")
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.847059, 0, 0.0823529, 0.796078), Color(1, 1, 1, 0.113725)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("HurtSound:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"death"]
+"values": [true]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+
+[sub_resource type="Animation" id="Animation_pu27t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.847059, 0, 0.0823529, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m25ky"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_emgcv"]
 _data = {
-"RESET": SubResource("Animation_gaptf"),
-"death": SubResource("Animation_rhxku")
+"RESET": SubResource("Animation_pu27t"),
+"hurt": SubResource("Animation_twrjc")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -329,10 +391,18 @@ collision_layer = 2
 script = ExtResource("1_yocce")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_5cafk")
 animation = &"death"
 autoplay = "idle"
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+offset_left = -19.0
+offset_top = -14.0
+offset_right = 21.0
+offset_bottom = 26.0
+color = Color(0.847059, 0, 0.0823529, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
@@ -346,3 +416,11 @@ libraries = {
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_scayq")
 volume_db = -5.0
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_emgcv")
+}
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gnpbd")

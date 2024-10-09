@@ -3,14 +3,33 @@ extends CharacterBody2D
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
+const MAX_HITPOINTS = 3
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-var alive = true
+@onready var game_manager: Node = %GameManager
+@onready var hearts_container: HBoxContainer = %HeartsContainer
+@onready var effects: AnimationPlayer = $Effects
 
-# On player death
+
+var alive = true
+var hitpoints = 3
+
+# Player takes damage
+func take_damage():
+	effects.play("hurt")
+	hitpoints = hitpoints - 1
+	hearts_container.updateHearts(hitpoints)
+	print(hitpoints)
+	if hitpoints <= 0:
+		die()
+
+# Player death
 func die():
+	hitpoints = 0
+	hearts_container.updateHearts(hitpoints)
 	alive = false
+	game_manager.reset_game()
 	animation_player.play("death")
 
 func _physics_process(delta: float) -> void:

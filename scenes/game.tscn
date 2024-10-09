@@ -1,13 +1,14 @@
-[gd_scene load_steps=15 format=4 uid="uid://k046g03dfch3"]
+[gd_scene load_steps=17 format=4 uid="uid://k046g03dfch3"]
 
 [ext_resource type="PackedScene" uid="uid://dlhi7yrfri6pq" path="res://scenes/player.tscn" id="1_arb7l"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_ec4n0"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_xqp7c"]
 [ext_resource type="Texture2D" uid="uid://c5c0a7xf7rb1h" path="res://assets/sprites/world_tileset.png" id="2_5eg0m"]
 [ext_resource type="PackedScene" uid="uid://g6c71t5c74f8" path="res://scenes/platform.tscn" id="3_0ahga"]
 [ext_resource type="PackedScene" uid="uid://2y6v6c74hg62" path="res://scenes/coin.tscn" id="4_teffn"]
 [ext_resource type="PackedScene" uid="uid://crmkwjxqprdqm" path="res://scenes/killzone.tscn" id="5_blba8"]
 [ext_resource type="PackedScene" uid="uid://cyydv6bxn6g13" path="res://scenes/enemy.tscn" id="6_oif1w"]
+[ext_resource type="PackedScene" uid="uid://caoyihqk6bog0" path="res://scenes/hearts_container.tscn" id="8_nbb7x"]
+[ext_resource type="PackedScene" uid="uid://di7608iyc44sn" path="res://scenes/damagezone.tscn" id="9_d0evw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nih8n"]
 texture = ExtResource("2_5eg0m")
@@ -215,12 +216,23 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d0l5m"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbo0d"]
+
 [node name="Game" type="Node2D"]
-script = ExtResource("1_ec4n0")
+
+[node name="UI" type="CanvasLayer" parent="."]
+scale = Vector2(3.75, 3.75)
+transform = Transform2D(3.75, 0, 0, 3.75, 0, 0)
+
+[node name="HeartsContainer" parent="UI" instance=ExtResource("8_nbb7x")]
+unique_name_in_owner = true
+z_index = 1
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_xqp7c")
+
+[node name="Timer" type="Timer" parent="GameManager"]
 
 [node name="TileMaps" type="Node" parent="."]
 
@@ -269,7 +281,7 @@ position = Vector2(617, -10)
 
 [node name="Platform" parent="Platforms" instance=ExtResource("3_0ahga")]
 z_index = 1
-position = Vector2(37, -12)
+position = Vector2(35, -12)
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("3_0ahga")]
 z_index = 1
@@ -290,3 +302,11 @@ shape = SubResource("WorldBoundaryShape2D_d0l5m")
 [node name="Enemy" parent="." instance=ExtResource("6_oif1w")]
 z_index = 1
 position = Vector2(744, 5)
+
+[node name="Damagezone" parent="." instance=ExtResource("9_d0evw")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damagezone"]
+position = Vector2(22, 5)
+shape = SubResource("RectangleShape2D_wbo0d")
+
+[connection signal="timeout" from="GameManager/Timer" to="GameManager" method="_on_timer_timeout"]

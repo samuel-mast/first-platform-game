@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://k046g03dfch3"]
+[gd_scene load_steps=16 format=4 uid="uid://k046g03dfch3"]
 
 [ext_resource type="PackedScene" uid="uid://dlhi7yrfri6pq" path="res://scenes/player.tscn" id="1_arb7l"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_xqp7c"]
 [ext_resource type="Texture2D" uid="uid://c5c0a7xf7rb1h" path="res://assets/sprites/world_tileset.png" id="2_5eg0m"]
+[ext_resource type="PackedScene" uid="uid://cbklf7yv7bc63" path="res://scenes/score.tscn" id="2_ysu04"]
 [ext_resource type="PackedScene" uid="uid://g6c71t5c74f8" path="res://scenes/platform.tscn" id="3_0ahga"]
 [ext_resource type="PackedScene" uid="uid://2y6v6c74hg62" path="res://scenes/coin.tscn" id="4_teffn"]
 [ext_resource type="PackedScene" uid="uid://crmkwjxqprdqm" path="res://scenes/killzone.tscn" id="5_blba8"]
@@ -224,6 +225,12 @@ transform = Transform2D(3.75, 0, 0, 3.75, 0, 0)
 [node name="HeartsContainer" parent="UI" instance=ExtResource("8_nbb7x")]
 unique_name_in_owner = true
 z_index = 1
+
+[node name="Score" parent="UI" instance=ExtResource("2_ysu04")]
+offset_left = -878.133
+offset_top = 6.13333
+offset_right = -849.133
+offset_bottom = 22.1333
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true

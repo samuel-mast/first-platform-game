@@ -4,7 +4,7 @@ extends Node
 @onready var hearts_container: HBoxContainer = $"../UI/HeartsContainer"
 @onready var player: CharacterBody2D = $"../Player"
 @onready var HeartClass = preload("res://scenes/heart.tscn")
-
+@onready var score_panel: Panel = $"../UI/Score"
 
 var score = 0
 
@@ -13,6 +13,7 @@ func _ready():
 
 func add_point():
 	score += 1
+	score_panel.update_score(score)
 	print("score")
 	
 func reset_game():

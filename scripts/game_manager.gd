@@ -14,7 +14,6 @@ func _ready():
 func add_point():
 	score += 1
 	score_panel.update_score(score)
-	print("score")
 	
 func reset_game():
 	Engine.time_scale = 0.5

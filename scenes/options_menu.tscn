@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbioi2rvn8b6w"]
+
+[ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_78wyt"]
+[ext_resource type="FontFile" uid="uid://b7165d5cubt7s" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_akg6w"]
+[ext_resource type="FontFile" uid="uid://c0mp71o8spg28" path="res://assets/fonts/PixelOperator8.ttf" id="3_18j6b"]
+[ext_resource type="PackedScene" uid="uid://7npcelgvb7id" path="res://scenes/volume_slider.tscn" id="3_wj4qr"]
+
+[node name="OptionsMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_78wyt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -139.0
+offset_right = 240.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="OptionsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_akg6w")
+text = "Options"
+horizontal_alignment = 1
+
+[node name="SoundLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_18j6b")
+text = "Overall Sound"
+
+[node name="SoundSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_wj4qr")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_18j6b")
+text = "Music"
+
+[node name="MusicSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_wj4qr")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SFXLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_18j6b")
+text = "SFX"
+
+[node name="SFXSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_wj4qr")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_18j6b")
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

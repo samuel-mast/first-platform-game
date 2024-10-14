@@ -20,7 +20,6 @@ func take_damage():
 	effects.play("hurt")
 	hitpoints = hitpoints - 1
 	hearts_container.updateHearts(hitpoints)
-	print(hitpoints)
 	if hitpoints <= 0:
 		die()
 

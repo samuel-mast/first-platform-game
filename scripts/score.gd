@@ -1,6 +1,6 @@
-extends Panel
+extends Control
 
-@onready var score_label: RichTextLabel = $ScoreLabel
+@onready var score_label: RichTextLabel = $MarginContainer/Score/ScoreLabel
 
 var score_text = ""
 

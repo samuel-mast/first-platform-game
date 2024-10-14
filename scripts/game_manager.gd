@@ -4,7 +4,7 @@ extends Node
 @onready var hearts_container: HBoxContainer = $"../UI/HeartsContainer"
 @onready var player: CharacterBody2D = $"../Player"
 @onready var HeartClass = preload("res://scenes/heart.tscn")
-@onready var score_panel: Panel = $"../UI/Score"
+@onready var score_panel: Control = $"../UI/Score"
 @onready var pause_menu: Control = %PauseMenu
 
 var score = 0

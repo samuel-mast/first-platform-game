@@ -228,10 +228,11 @@ unique_name_in_owner = true
 z_index = 1
 
 [node name="Score" parent="UI" instance=ExtResource("2_ysu04")]
-offset_left = -878.133
-offset_top = 6.13333
-offset_right = -849.133
-offset_bottom = 22.1333
+anchors_preset = -1
+anchor_right = 0.267
+anchor_bottom = 0.267
+offset_right = 0.415985
+offset_bottom = -0.0160065
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("3_rde3n")]
 unique_name_in_owner = true

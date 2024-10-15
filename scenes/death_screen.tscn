@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://d38fuoia1erl7"]
+
+[ext_resource type="FontFile" uid="uid://c0mp71o8spg28" path="res://assets/fonts/PixelOperator8.ttf" id="1_bbtdh"]
+[ext_resource type="FontFile" uid="uid://b7165d5cubt7s" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_0x82s"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.709804, 0.0509804, 0.235294, 0.196078)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -12.5
+offset_right = 124.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_bbtdh")
+theme_override_fonts/bold_font = ExtResource("2_0x82s")
+theme_override_font_sizes/normal_font_size = 24
+text = "You Perished"

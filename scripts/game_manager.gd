@@ -6,6 +6,7 @@ extends Node
 @onready var HeartClass = preload("res://scenes/heart.tscn")
 @onready var score_panel: Control = $"../UI/Score"
 @onready var pause_menu: Control = %PauseMenu
+@onready var death_screen: Control = $"../UI/DeathScreen"
 
 var score = 0
 var is_paused = false
@@ -23,11 +24,13 @@ func add_point():
 	score_panel.update_score(score)
 	
 func reset_game():
+	death_screen.show()
 	Engine.time_scale = 0.5
 	timer.start()
 
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1
+	death_screen.hide()
 	get_tree().reload_current_scene()
 
 func update_pause_menu(paused):

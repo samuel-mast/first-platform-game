@@ -27,8 +27,11 @@ func die():
 	hitpoints = 0
 	hearts_container.updateHearts(hitpoints)
 	alive = false
-	game_manager.reset_game()
+	game_manager.reset_game(0)
 	animation_player.play("death")
+	
+func check():
+	game_manager.check_victory()
 
 func _physics_process(delta: float) -> void:
 	if !alive:

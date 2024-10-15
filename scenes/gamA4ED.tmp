@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bomdkkrvogpjx" path="res://scenes/pause_menu.tscn" id="3_rde3n"]
 [ext_resource type="PackedScene" uid="uid://cbioi2rvn8b6w" path="res://scenes/options_menu.tscn" id="4_ivenk"]
 [ext_resource type="PackedScene" uid="uid://2y6v6c74hg62" path="res://scenes/coin.tscn" id="4_teffn"]
-[ext_resource type="PackedScene" uid="uid://d38fuoia1erl7" path="res://scenes/action_screen.tscn" id="5_7qrti"]
+[ext_resource type="PackedScene" uid="uid://d38fuoia1erl7" path="res://scenes/death_screen.tscn" id="5_7qrti"]
 [ext_resource type="PackedScene" uid="uid://crmkwjxqprdqm" path="res://scenes/killzone.tscn" id="5_blba8"]
 [ext_resource type="PackedScene" uid="uid://cyydv6bxn6g13" path="res://scenes/enemy.tscn" id="6_oif1w"]
 [ext_resource type="PackedScene" uid="uid://cungbv8yot67x" path="res://scenes/hearts_container.tscn" id="8_nbb7x"]
@@ -252,7 +252,7 @@ offset_bottom = -0.0160065
 [node name="OptionsMenu" parent="UI" instance=ExtResource("4_ivenk")]
 visible = false
 
-[node name="ActionScreen" parent="UI" instance=ExtResource("5_7qrti")]
+[node name="DeathScreen" parent="UI" instance=ExtResource("5_7qrti")]
 visible = false
 anchors_preset = -1
 anchor_right = 0.266

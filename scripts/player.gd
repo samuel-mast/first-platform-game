@@ -11,7 +11,6 @@ const MAX_HITPOINTS = 3
 @onready var hearts_container: HBoxContainer = %HeartsContainer
 @onready var effects: AnimationPlayer = $Effects
 
-
 var alive = true
 var hitpoints = 3
 
